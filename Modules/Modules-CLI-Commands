@@ -1,0 +1,53 @@
+Command to list modules :-
+
+[spaul@Caracal Modules]$ java --list-modules
+java.base@11.0.6
+java.compiler@11.0.6
+java.datatransfer@11.0.6
+java.desktop@11.0.6
+java.instrument@11.0.6
+java.logging@11.0.6
+java.management@11.0.6
+java.management.rmi@11.0.6
+java.naming@11.0.6
+java.net.http@11.0.6
+java.prefs@11.0.6
+java.rmi@11.0.6
+java.scripting@11.0.6
+java.se@11.0.6
+java.security.jgss@11.0.6
+java.security.sasl@11.0.6
+java.smartcardio@11.0.6
+java.sql@11.0.6
+java.sql.rowset@11.0.6
+java.transaction.xa@11.0.6
+
+Command to get the description of a module :-
+[spaul@Caracal Modules]$ java --describe-module java.logging
+java.logging@11.0.6
+exports java.util.logging
+requires java.base mandated
+provides jdk.internal.logger.DefaultLoggerFinder with sun.util.logging.internal.LoggingProviderImpl
+contains sun.net.www.protocol.http.logging
+contains sun.util.logging.internal
+contains sun.util.logging.resources
+
+
+Use jdep tool to check for dependencies :-
+[spaul@Caracal Modules]$ jdeps --print-module-deps -m java.sql
+java.base,java.logging,java.transaction.xa,java.xml
+
+
+[spaul@Caracal Modules]$ jdeps --list-reduced-deps --module java.sql
+   java.base/jdk.internal.reflect
+   java.logging
+   java.transaction.xa
+   java.xml
+
+[spaul@Caracal Modules]$ jdeps --list-deps --module java.sql.rowset
+   java.base/jdk.internal.reflect
+   java.base/sun.reflect.misc
+   java.logging
+   java.naming
+   java.sql
+   java.xml
